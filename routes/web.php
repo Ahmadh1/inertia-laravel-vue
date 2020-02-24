@@ -29,4 +29,9 @@ Route::get('/contact', function () {
     ]);
 });
 
-Route::get('users', 'UserController@index');
+Route::get('users', 'UserController@index')->name('users.index');
+Route::get('users/create', 'UserController@create');
+Route::post('create', 'UserController@store');
+Route::get('user/{user}/edit', 'UserController@edit');
+Route::patch('user/{user}/update', 'UserController@update');
+Route::delete('user/{user}/delete', 'UserController@destroy');

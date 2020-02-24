@@ -36,4 +36,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /*
+    * [@name]
+    ** Description: 
+    * [return]
+    * [data]
+    */
+    public function getRouteKeyName() {
+        return $this->id;
+    }
+
+    public function setPasswordAttribute($password) {
+        $this->attributes['password'] = bcrypt($password);
+    }
 }

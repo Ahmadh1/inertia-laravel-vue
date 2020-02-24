@@ -3,7 +3,7 @@
         <div class="container">
             <div class="col-10 offset-1">
                 <div class="my-5">
-                    <inertia-link href="/user/create" class="btn btn-primary">Add New User</inertia-link>
+                    <inertia-link href="/users/create" class="btn btn-primary">Add New User</inertia-link>
                 </div>
                 <div class="card mt-5">
                     <div class="card-header">Users</div>

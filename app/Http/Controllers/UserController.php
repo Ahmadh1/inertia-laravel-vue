@@ -14,7 +14,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $users = User::all();
+        $users = User::orderBy('id', 'desc')->get();
         return Inertia::render('Users/Index', [
             'users' =>  $users
         ]);
@@ -25,9 +25,8 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+        return Inertia::render('Users/Create');
     }
 
     /**
@@ -36,9 +35,22 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+       
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+        ]);
+        return redirect()
+                ->route('users.index')
+                ->with(['msg' => 'User created successfully']);
     }
 
     /**
