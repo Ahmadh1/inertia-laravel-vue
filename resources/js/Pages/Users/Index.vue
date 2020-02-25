@@ -2,6 +2,13 @@
     <layout>
         <div class="container">
             <div class="col-10 offset-1">
+                <div v-if="msg" class="mt-4 alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <strong>Holy guacamole!</strong> {{msg}}
+                </div>
                 <div class="my-5">
                     <inertia-link href="/users/create" class="btn btn-primary">Add New User</inertia-link>
                 </div>
@@ -22,7 +29,6 @@
                                     <td>{{user.email}}</td>
                                     <td>
                                         <inertia-link :href="`/user/${user.id}/edit`" class="btn btn-outline-dark btn-sm">edit</inertia-link>
-                                        <inertia-link :href="`/user/${user.id}/remove`" class="btn btn-outline-danger btn-sm">remove</inertia-link>
                                     </td>
                                 </tr>
                             </tbody>
@@ -38,7 +44,7 @@
 import Layout from '../../Shared/Layout'
 export default {
     name: 'Index',
-    props: ['users'],
+    props: ['users', 'msg'],
     components: {
         Layout,
     }

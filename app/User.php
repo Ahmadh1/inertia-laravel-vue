@@ -43,9 +43,6 @@ class User extends Authenticatable
     * [return]
     * [data]
     */
-    public function getRouteKeyName() {
-        return $this->id;
-    }
 
     public function setPasswordAttribute($password) {
         $this->attributes['password'] = bcrypt($password);

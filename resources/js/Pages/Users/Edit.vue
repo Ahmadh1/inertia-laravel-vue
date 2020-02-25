@@ -12,7 +12,7 @@
                           </button>
                           <strong>Holy guacamole!</strong>{{errors}}
                       </div>
-                      <form action="/create" method="POST" @submit.prevent="createUser">
+                      <form action="#" method="PATCH" @submit.prevent="updateUser">
                             <div class="form-group">    
                                 <label for="name">Name:</label>
                                 <input type="text" v-model="form.name" id="name" class="form-control" placeholder="John Doe">
@@ -30,6 +30,7 @@
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-success">Submit</button>  
+                                <button class="btn btn-danger" @click.prevent="deleteUser">Submit</button>  
                             </div>
                       </form>
                   </div>
@@ -42,23 +43,27 @@
 <script>
 import Layout from '../../Shared/Layout'
 export default {
-    name: 'Create',
-    props: ['errors'],
+    name: 'Edit',
+    props: ['user', 'errors'],
     components: {
         Layout,
     },
     data () {
         return {
             form: {
-                name: '',
-                email: '',
-                password: ''
+                name: this.user.name,
+                email: this.user.email
             }
         }
     },
     methods: {
-        createUser() {
-            this.$inertia.post('/create', this.form)
+        updateUser() {
+            this.$inertia.patch(`/user/${this.user.id}/update`, this.form)
+        },
+        deleteUser() {
+            if (confirm('Are you sure you want to delete this contact?')) {
+                this.$inertia.delete(`/user/${this.user.id}/delete`)
+            }
         }
     }
 }
